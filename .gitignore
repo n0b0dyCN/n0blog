@@ -1,3 +1,11 @@
+# vim tmp file
+*.swp
+*.swo
+*~
+
+# ignore database data
+sql/postgres-data/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

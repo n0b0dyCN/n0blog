@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+    sql:
+        container_name: sql
+        restart: always
+        image: postgres:latest
+        volumes:
+            - ./sql/postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=n0b0dy_s3cr3t
+    n0blog:
+        container_name: n0blog
+        build: ./python
+        ports:
+            - 6666:5000
+        environment:
+            - DEV_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_dev
+            - TEST_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_test
+            - DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog
+            - SECRET_KEY=n05ecre7
