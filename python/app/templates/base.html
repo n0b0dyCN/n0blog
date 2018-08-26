@@ -1,1 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+	<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_809310_8ty4pelv2so.css">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')  }}" type="image/x-icon">
+		<link rel="icon" href="{{ url_for('static', filename='favicon.png')  }}" type="image/x-icon">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	{% endblock %}
+	</head>
+	<body>
+   
+		{% block content %}
+		<div class="container w-75 mw-10 mx-auto px2 my-5">
+			<header>
+			{% block header %}
+			{% endblock %}
+			</header>
+
+			<div class="container">
+				{% block page_content %}{% endblock %}
+			</div>
+
+			{% block footer %}
+			<footer class="footer w-75">
+				<div class="container">
+					<div class="row">
+						<div class="col text-left">
+							Copyright &copy; 2018 n0blog
+						</div>
+						<div class="col text-center">
+								<a class="mx-auto px-3" href="https://github.com/n0b0dyCN">
+									<img src="{{ url_for('static', filename='images/github.png') }}">
+								</a>
+						</div>
+						<div class="col">
+							<nav class="navbar navbar-light">
+								<ul class="list-inline">
+									<li class="list-inline-item pr-3">
+										<a class="" href="{{ url_for('main.index') }}">首页</a>
+									</li>
+									<li class="list-inline-item pr-3">
+										<a class="" href="{{ url_for('main.archive') }}">归档</a>
+									</li>
+									<li class="list-inline-item pr-3">
+										<a class="" href="{{ url_for('main.resume') }}">关于</a>
+									</li>
+									<li class="list-inline-item pr-3">
+										<a class="" href="{{ url_for('main.links') }}">友链</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</footer>
+			{% endblock %}
+		</div>
+		{% endblock %}
+
+		{% block scripts %}
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		{% endblock %}
+
+	</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block header %}
+<div class="container">
+	<h1> n0b0dy  </h1>
+	<nav class="navbar navbar-light mt-5">
+		<ul class="list-inline">
+			<li class="list-inline-item pr-3"><a class="py-1" href="{{ url_for('main.index') }}">首页</a></li>
+			<li class="list-inline-item pr-3"><a class="py-1" href="{{ url_for('main.archive') }}">归档</a></li>
+			<li class="list-inline-item pr-3"><a class="py-1" href="{{ url_for('main.resume') }}">关于</a></li>
+			<li class="list-inline-item pr-3"><a class="py-1" href="{{ url_for('main.links') }}">友链</a></li>
+		</ul>
+	</nav>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<!-- search bar -->
+<h1 class="my-4">Search</h1>
+<div class="container mt-4 mb-5">
+	<form action="{{ url_for('main.search') }}" method="GET">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="custom-search-input">
+					<div class="input-group col-md-12">
+						<input type="text" name="s" class="form-control rounded mr-3" placeholder="Search..." />
+						<span class="input-group-btn">
+							<button class="btn btn-lg btn-search" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!-- article list -->
+<h1 class="mt-5 mb-4">Archives</h1>
+<div class="container my-4 archive">
+	<ul class="list-unstyled archive-list">
+	{% for post in posts %}
+		<li class="row my-2 archive-item">
+			<div class="col-md-2 meta">
+				<span>
+				{{ post.time }}
+				</span>
+			</div>
+			<div class="col">
+			<a class="" href="{{ post.url }}">{{ post.desc }}</a>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

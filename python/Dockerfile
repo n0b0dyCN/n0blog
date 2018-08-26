@@ -17,7 +17,8 @@ COPY requirements requirements
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements/docker.txt
 
-COPY app app
+#COPY app app
+VOLUME app
 COPY migrations migrations
 COPY n0blog.py config.py boot.sh ./
 

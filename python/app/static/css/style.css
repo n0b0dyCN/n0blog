@@ -1,0 +1,84 @@
+html {
+	position: relative;
+    min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  color: #eaeaea;
+  margin-bottom: 60px;
+  background: #222b2f url("../images/bkg.png") 0 0;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+}
+
+header {
+	border-bottom: 1px dashed #b5e853;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+}
+
+/* header */
+
+header h1:before {
+    content: "./ ";
+}
+
+header h1 {
+	color: #caa851;
+	font-weight: bold;
+}
+
+.navbar ul {
+	list-style: none;
+}
+
+.navbar ul li {
+	border-right: 1px dashed #caa851;
+	display: inline-block;
+}
+
+.navbar ul li:last-child {
+	border-right: 0;
+}
+
+.navbar ul li a {
+	color: #caa851;
+}
+
+.navbar ul li a:hover {
+	color: #caa851;
+	text-decoration: none;
+	border-bottom: 1px dashed #caa851;
+	padding: 0 0 0.25rem 0;
+
+}
+
+/* body */
+
+body h1 {
+	color: #caa851;
+}
+
+.archive .archive-list .archive-item a {
+	color: #eaeaea;
+}
+
+.archive .archive-list .archive-item a:hover {
+	color: #caa851;
+	text-decoration: none;
+	border-bottom: 1px dashed #caa851;
+	padding 0 0 0.25rem 0;
+}
+
+.archive .archive-list .archive-item .meta {
+	color: #666;
+}
+
+.btn-search {
+	background: #b5e853;
+}

@@ -12,10 +12,13 @@ services:
     n0blog:
         container_name: n0blog
         build: ./python
+        volumes:
+            - ./python/app:/home/n0blog/app
         ports:
-            - 6666:5000
+            - 8000:5000
         environment:
             - DEV_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_dev
             - TEST_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_test
             - DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog
             - SECRET_KEY=n05ecre7
+            - FLASK_APP=n0blog

@@ -1,0 +1,19 @@
+<div class="container">
+	<h1>{{ meta.title[0] }}</h1>
+	<div class="meta">
+		<div class="date">
+			<ul class="list-inline">
+				<li class="list-inline-item pr2"><i class="fas fa-clock"></i></li>
+				<li class="list-inline-item pr2">{{ meta.date[0] }}</li>
+			</ul>
+		</div>
+		<div class="tags">
+			<ul class="list-inline">
+				<li class="list-inline-item pr-2"><i class="fa fa-tags"></i></li>
+				{% for tag in meta.tags %}
+				<li class="list-inline-item pr-2">{{ tag }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
