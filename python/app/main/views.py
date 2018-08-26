@@ -49,7 +49,7 @@ def test():
         }
     }
     raw = open("/home/n0blog/app/static/test.md", "r").read()
-    md = Markdown(extensions = ['markdown.extensions.meta', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite'],
+    md = Markdown(extensions = ['markdown.extensions.meta', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.tables'],
                  extension_configs=config)
     html = md.convert(raw)
     meta = md.Meta

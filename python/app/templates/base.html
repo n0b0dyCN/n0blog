@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename="css/bootstrap.min.css") }}">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_809310_8ty4pelv2so.css">
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')  }}" type="image/x-icon">
 		<link rel="icon" href="{{ url_for('static', filename='favicon.png')  }}" type="image/x-icon">
@@ -29,17 +28,11 @@
 			{% block footer %}
 			<footer class="footer w-75">
 				<div class="container">
-					<div class="row">
-						<div class="col text-left">
-							Copyright &copy; 2018 n0blog
+						<div class="footer-left">
+							Copyright &copy; 2018 Powered by n0blog
 						</div>
-						<div class="col text-center">
-								<a class="mx-auto px-3" href="https://github.com/n0b0dyCN">
-									<img src="{{ url_for('static', filename='images/github.png') }}">
-								</a>
-						</div>
-						<div class="col">
-							<nav class="navbar navbar-light">
+						<div class="footer-right">
+							<div class="nav-list">
 								<ul class="list-inline">
 									<li class="list-inline-item pr-3">
 										<a class="" href="{{ url_for('main.index') }}">首页</a>
@@ -54,9 +47,8 @@
 										<a class="" href="{{ url_for('main.links') }}">友链</a>
 									</li>
 								</ul>
-							</nav>
+							</div>
 						</div>
-					</div>
 				</div>
 			</footer>
 			{% endblock %}

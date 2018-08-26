@@ -20,6 +20,21 @@ footer {
 	bottom: 0;
 	height: 60px;
 	width: 100%;
+	text-align: center;
+}
+
+@media (min-width: 55rem) {
+
+	footer {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	footer .footer-left {
+		float: left;
+	}
+	footer .footer-right {
+		float: right;
+	}
 }
 
 /* header */
@@ -33,20 +48,20 @@ header h1 {
 	font-weight: bold;
 }
 
-.navbar ul {
+.nav-list ul {
 	list-style: none;
 }
 
-.navbar ul li {
+.nav-list ul li {
 	border-right: 1px dashed #caa851;
 	display: inline-block;
 }
 
-.navbar ul li:last-child {
+.nav-list ul li:last-child {
 	border-right: 0;
 }
 
-.navbar ul li a {
+.nav-list ul li a {
 	color: #caa851;
 }
 

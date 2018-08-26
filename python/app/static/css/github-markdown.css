@@ -208,7 +208,7 @@
 }
 
 .markdown-body a {
-  color: #0366d6;
+  color: #ae1c30;
   text-decoration: none;
 }
 
@@ -422,8 +422,8 @@
 
 .markdown-body blockquote {
   padding: 0 1em;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
+  color: #9ab3bd;
+  border-left: 0.25em solid #b5e853;
 }
 
 .markdown-body blockquote>:first-child {
@@ -446,6 +446,18 @@
   border-bottom-color: #959da5;
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 #959da5;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+	color: #caa851;
+}
+
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	color: #8a7841;
 }
 
 .markdown-body h1,
@@ -493,6 +505,10 @@
   padding-bottom: 0.3em;
   font-size: 2em;
   border-bottom: 1px solid #eaecef;
+}
+
+.markdown-body h1:before {
+  content: "# ";
 }
 
 .markdown-body h2 {
@@ -577,12 +593,12 @@
 }
 
 .markdown-body table tr {
-  background-color: #fff;
+  background-color: #4b4b4b;
   border-top: 1px solid #c6cbd1;
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+  background-color: #808080;
 }
 
 .markdown-body img {
