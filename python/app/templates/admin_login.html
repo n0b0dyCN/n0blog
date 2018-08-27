@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+n0blog - admin login
+{% endblock %}
+
+{% block header %}
+<div class="container">
+	<h1>Admin Login</h1>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<h2 class="my-4">Input admin password:</h1>
+<div class="container mt-4 mb-5">
+	<form action="{{ url_for('admin.login') }}" method="POST">
+		<div class="search-group">
+			<div class="row">
+				<div class="col-8 col-md-7">
+					{{ form.password(class="form-control rounded mr-3 h-100", placeholder="Password...") }}
+				</div>
+				<div class="col-4 col-md-2">
+					<span class="search-group-btn">
+						<button class="btn btn-lg btn-search" type="submit">
+							<i class="iconfont icon-gou"></i>
+						</button>
+					</span>
+				</div>
+				{{ form.csrf_token }}
+			</div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

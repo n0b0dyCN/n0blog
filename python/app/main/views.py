@@ -8,6 +8,8 @@ from . import main
 from .. import db
 from ..models import Post, Comment, Link
 
+from ..markdown_util import render_md_raw
+
 class L():
     def __init__(self, time, url, desc):
         self.time=str(time)
@@ -42,26 +44,10 @@ def search():
 
 @main.route('/test', methods=['GET'])
 def test():
-    config = {
-        'markdown.extensions.codehilite': {
-            'use_pygments': False,
-            'css_class': 'prettyprint',
-        }
-    }
     raw = open("/home/n0blog/app/static/test.md", "r").read()
-    md = Markdown(extensions = ['markdown.extensions.meta', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite', 'markdown.extensions.tables'],
-                 extension_configs=config)
-    html = md.convert(raw)
-    meta = md.Meta
-    if 'title' not in meta:
-        meta['title'] = ["Untitled"]
-    if 'summary' not in meta:
-        meta['summary'] = ["Unsumarized."]
-    if 'tags' not in meta:
-        meta['tags'] = []
-    else:
-        meta['tags'] = [i.strip() for i in meta['tags'][0].split(',')]
-    if 'date' not in meta:
-        meta['date'] = ['Unknown date']
+    html, meta = render_md_raw(raw)
+    return render_template('post.html', html=html, meta=meta)
 
-    return render_template('post.html', html=html, meta=md.Meta)
+@main.route('/post/<int:id>')
+def post(id):
+    pass

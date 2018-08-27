@@ -22,3 +22,4 @@ services:
             - DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog
             - SECRET_KEY=n05ecre7
             - FLASK_APP=n0blog
+            - ADMIN_PASS=n0blog
