@@ -4,21 +4,6 @@
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename="css/github-markdown.css") }}">
 <link href="https://cdn.rawgit.com/google/code-prettify/master/loader/skins/desert.css" rel="stylesheet">
-<style>
-	.markdown-body {
-		box-sizing: border-box;
-		min-width: 200px;
-		max-width: 980px;
-		margin: 0 auto;
-		padding: 45px;
-	}
-
-	@media (max-width: 767px) {
-		.markdown-body {
-			padding: 15px;
-		}
-	}
-</style>
 {% endblock %}
 
 {% block header%}
@@ -26,7 +11,7 @@
 {% endblock%}
 
 {% block page_content %}
-<div class="container mt-2 mb-5 pb-5 markdown-body">
+<div class="container my-5 pb-5 markdown-body">
 	{{ html|safe }}
 </div>
 {% endblock %}
