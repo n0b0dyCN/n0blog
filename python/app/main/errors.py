@@ -8,7 +8,7 @@ def forbidden(e):
         resp = jsonify({'error': 'forbidden'})
         resp.status_code = 403
         return resp
-    return render_template('403.html'), 403
+    return render_template('error/403.html'), 403
 
 @main.app_errorhandler(404)
 def not_found(e):
@@ -17,7 +17,7 @@ def not_found(e):
         resp = jsonify({'error': 'not found'})
         resp.status_code = 404
         return resp
-    return render_template('404.html'), 404
+    return render_template('error/404.html'), 404
 
 @main.app_errorhandler(500)
 def internal_server_error(e):
@@ -26,4 +26,4 @@ def internal_server_error(e):
         resp = jsonify({'error': 'internal server error'})
         resp.status_code = 500
         return resp
-    return render_template('500.html'), 500
+    return render_template('error/500.html'), 500

@@ -5,6 +5,7 @@
 
 # ignore database data
 sql/postgres-data/
+sql/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -2,6 +2,7 @@
 
 source venv/bin/activate
 
+flask db init
 while true; do
     flask deploy
     if [[ "$?" == "0" ]]; then

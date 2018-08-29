@@ -7,87 +7,35 @@ from flask import Flask
 
 from . import db
 
+post_tag = db.Table(
+    'post_tag',
+    db.Column('post_id', db.Integer, db.ForeignKey('posts.id'), primary_key=True),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+)
+
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    hide = db.Column(db.Boolean)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    tags = db.relationship('Tag', secondary=post_tag, backref=db.backref('posts'))
 
-    def to_json(self):
-        json_post = {
-            'url': url_for('posts', id=self.id),
-            'body': self.body,
-            'body_html': self.body_html,
-            'timestamp': self.timestamp,
-            'comments_count': self.comments.count()
-        }
-        return json_post
-
-    @staticmethod
-    def from_json(json_post):
-        body = json_post.get('body')
-        if body is None or body == '':
-            # need to raise an error here
-            return
-        return Post(body=body)
-
-    @staticmethod
-    def on_change_body(target, value, oldvalue, initiator):
-        allow_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-                    'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']
-        target.body_html = bleach.linkify(bleach.clean(
-            markdown(value, output_format='html'),
-            tags=allow_tags, strip=True
-        ))
-
-db.event.listen(Post.body, 'set', Post.on_change_body)
+class Tag(db.Model):
+    __tablename__ = 'tags'
+    id = db.Column(db.Integer, primary_key=True)
+    txt = db.Column(db.Text)
 
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    msg = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    disabled = db.Column(db.Boolean)
+    hide = db.Column(db.Boolean)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
-
-    def to_json(self):
-        if self.disabled:
-            return {
-                'disabled': True,
-                'body': ''
-            }
-        json_comment = {
-            'url': url_for('api.get_comments', id=self.id),
-            'body': self.body,
-            'body_html': self.body_html,
-            'timestamp': self.timestamp,
-            'disabled': self.disabled,
-            'post_id': self.post_id
-        }
-        return json_comment
-
-    @staticmethod
-    def from_json(json_comment):
-        body = json_post.get(body)
-        if body is None or body == '':
-            # need to raise an error here
-            return
-        return Comment(body=body)
-
-    @staticmethod
-    def on_change_body(target, value, oldvalue, initiator):
-        allowed_tag = ['a', 'abbr', 'acronym', 'b', 'code', 'em', 'i',
-                      'strong']
-        target.body_html = bleach.linkify(bleach.clean(
-            markdown(value, output_format='html'),
-            tags=allowed_tag, strip=True
-        ))
-
-db.event.listen(Comment.body, 'set', Comment.on_change_body)
 
 class Link(db.Model):
     __tablename__ = 'links'

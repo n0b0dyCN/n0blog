@@ -14,5 +14,6 @@ def make_shell_context():
 
 @app.cli.command()
 def deploy():
+    db.create_all()
     pass
 

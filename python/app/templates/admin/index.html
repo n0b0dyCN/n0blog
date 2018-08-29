@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+n0blog - admin panel
+{% endblock %}
+
+{% block header %}
+<h1>Admin Control Panel</h1>
+{% endblock %}
+
+{% block page_content %}
+
+<nav class="my-5">
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+		<a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="true">
+			About
+		</a>
+		<a class="nav-item nav-link" id="nav-posts-tab" data-toggle="tab" href="#nav-posts" role="tab" aria-controls="nav-posts" aria-selected="false">
+			Posts
+		</a>
+		<a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab" aria-controls="nav-comments" aria-selected="false">
+			Comments
+		</a>
+		<a class="nav-item nav-link" id="nav-links-tab" data-toggle="tab" href="#nav-links" role="tab" aria-controls="nav-links" aria-selected="false">
+			Links
+		</a>
+	</div>
+</nav>
+
+<div class="tab-content my-5" id="nav-tabContent">
+	<div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+		{% include "admin/about.html" %}
+	</div>
+	<div class="tab-pane fade" id="nav-posts" role="tabpanel" aria-labelledby="nav-posts-tab">
+		{% include "admin/posts.html" %}
+	</div>
+	<div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+		{% include "admin/comments.html" %}
+	</div>
+	<div class="tab-pane fade" id="nav-links" role="tabpanel" aria-labelledby="nav-links-tab">
+		{% include "admin/links.html" %}
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+	<!-- Latest compiled and minified Locales -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="{{ url_for("static", filename="js/tables.js") }}"></script>
+{% endblock %}

@@ -21,33 +21,34 @@ def index():
     posts=[]
     for i in range(10):
         posts.append(L("2018 Apr 30th", url_for('main.search', i=i), "test{}".format(i)))
-    return render_template('index.html', posts=posts)
+    return render_template('main/index.html', posts=posts)
 
 @main.route('/resume', methods=['GET'])
 def resume():
     return "resume"
-    return render_template('resume.html')
+    return render_template('main/resume.html')
 
 @main.route('/archive', methods=['GET'])
 def archive():
     return "archive"
-    return render_template('archives.html')
+    return render_template('main/archives.html')
 
 @main.route('/links', methods=['GET'])
 def links():
     return "links"
-    return render_template('links.html')
+    return render_template('main/links.html')
 
 @main.route('/search', methods=["GET"])
 def search():
-    return render_template('search.html')
+    return render_template('main/search.html')
 
 @main.route('/test', methods=['GET'])
 def test():
-    raw = open("/home/n0blog/app/static/test.md", "r").read()
+    raw = open("/posts/test/post.md", "r").read()
     html, meta = render_md_raw(raw)
-    return render_template('post.html', html=html, meta=meta)
+    return render_template('main/post.html', html=html, meta=meta)
 
 @main.route('/post/<int:id>')
 def post(id):
+    return "Post {}".format(id)
     pass

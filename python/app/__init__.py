@@ -2,10 +2,12 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
 
 from config import config
 
 db = SQLAlchemy()
+csrf = CSRFProtect()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -16,6 +18,7 @@ def create_app(config_name):
     # bootstrap.init_app(app)
     # moment.init_app(app)
     db.init_app(app)
+    csrf.init_app(app)
 
     # register blueprint
     from .main import main as main_blueprint

@@ -1,4 +1,5 @@
 import os
+import datetime
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
@@ -9,6 +10,7 @@ class Config:
 
     @staticmethod
     def init_app(app):
+        app.permanent_session_lifetime = datetime.timedelta(seconds=10*60)
         pass
 
 class DevelopmentConfig(Config):

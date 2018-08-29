@@ -6,20 +6,23 @@ services:
         restart: always
         image: postgres:latest
         volumes:
-            - ./sql/postgres-data:/var/lib/postgresql/data
+            - ./sql/data:/var/lib/postgresql/data/pgdata
         environment:
-            - POSTGRES_PASSWORD=n0b0dy_s3cr3t
+            - POSTGRES_PASSWORD=n0blog
+            - POSTGRES_USER=n0blog
     n0blog:
         container_name: n0blog
         build: ./python
         volumes:
             - ./python/app:/home/n0blog/app
+              #- ./python/migrations:/home/n0blog/migrations
+            - ./posts:/posts
         ports:
             - 8000:5000
         environment:
-            - DEV_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_dev
-            - TEST_DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog_test
-            - DATABASE_URL=postgresql://postgres:n0blog_s3cr3t@sql/n0blog
-            - SECRET_KEY=n05ecre7
+            - DEV_DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
+            - TEST_DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
+            - DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
+            - SECRET_KEY=n0blog
             - FLASK_APP=n0blog
             - ADMIN_PASS=n0blog

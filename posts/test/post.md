@@ -1,9 +1,8 @@
 title:   My Document
 summary: A brief description of my document.
-authors: Waylan Limberg
+authors: n0b0dy
 date:    October 2, 2007
 tags: web, pwn
-blank-value:
 
 An h1 header
 ============
