@@ -3,9 +3,11 @@ from flask import render_template, redirect, request, \
         url_for, flash, session, jsonify
 
 from . import admin
-from .forms import AdminLoginForm
-from ..models import Post
-from ..markdown_util import render_md_file, render_md_raw
+from .forms import AdminLoginForm, LinkAddForm
+from .. import db
+from ..models import Post, Tag, Comment, Link
+from ..markdown_util import render_md_file, render_md_raw, \
+        add_or_update_post, make_show, make_hide, delete_post
 
 @admin.before_request
 def before_request():
@@ -41,7 +43,8 @@ def logout():
 
 @admin.route("/")
 def index():
-    return render_template('admin/index.html')
+    link_add_form = LinkAddForm()
+    return render_template('admin/index.html', link_add_form=link_add_form)
 
 @admin.route("/posts")
 def posts():
@@ -55,36 +58,3 @@ def comments():
 def links():
     return "Links"
 
-@admin.route("/getposts")
-def getposts():
-    posts = []
-    for t in os.listdir(os.getenv("POSTS_PATH")):
-        d = {}
-        path = os.path.join(os.getenv("POSTS_PATH"), t)
-        if not os.path.isdir(path):
-            continue
-        md_path = os.path.join(path, "post.md")
-        if not os.path.exists(md_path):
-            continue
-        html, meta = render_md_file(md_path)
-        d['path'] = path
-        d['title'] = meta['title']
-        d['date'] = meta['date']
-        d['tags'] = meta['tags']
-        d['show'] = 1
-        posts.append(d)
-    return jsonify(posts)
-
-@admin.route("/posts/refresh", methods=["POST"])
-def posts_refresh():
-    print (request.headers)
-    print (request.form)
-    return "success"
-
-@admin.route("/posts/hide", methods=["POST"])
-def posts_hide():
-    return "success";
-
-@admin.route("/posts/show", methods=["POST"])
-def posts_show():
-    return "success";

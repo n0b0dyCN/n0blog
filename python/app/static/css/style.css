@@ -111,6 +111,27 @@ body h1 {
 	color: #666;
 }
 
+.links .links-list .links-item a {
+	color: #eaeaea;
+}
+
+.links .links-list .links-item a {
+	color: #eaeaea;
+	border-bottom: 1px dashed #eaeaea;
+	padding 0 0 0.25rem 0;
+}
+
+.links .links-list .links-item a:hover {
+	color: #caa851;
+	text-decoration: none;
+	border-bottom: 1px dashed #caa851;
+	padding 0 0 0.25rem 0;
+}
+
+.links .links-list .links-item .meta {
+	color: #666;
+}
+
 .btn-search {
 	background: #b5e853;
 }

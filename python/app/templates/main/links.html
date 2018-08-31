@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+n0blog - Links
+{% endblock %}
+
+{% block header %}
+<h1>Friend Links </h1>
+{% endblock %}
+
+{% block page_content %}
+<div class="container my-5 mx-5 links">
+	<ul class="list-unstyled links-list">
+	{% for link in links %}
+		<li class="my-2 links-item">
+			<a class="" href="{{ link.link }}" target="_blank">{{ link.name }}</a>
+			<span class="meta mx-4">
+				---
+			</span>
+			<span>
+				{{ link.description }}
+			<span>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}

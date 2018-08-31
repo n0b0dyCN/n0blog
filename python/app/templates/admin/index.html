@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block include_style %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-editable.css') }}">
+{% endblock %}
+
 {% block title %}
 n0blog - admin panel
 {% endblock %}
@@ -50,5 +55,7 @@ n0blog - admin panel
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
 	<!-- Latest compiled and minified Locales -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="//rawgit.com/wenzhixin/bootstrap-table/master/src/extensions/editable/bootstrap-table-editable.js"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap-editable.js') }}"></script>
 	<script src="{{ url_for("static", filename="js/tables.js") }}"></script>
 {% endblock %}

@@ -1,3 +1,29 @@
+<div class="container mt-4 mb-5">
+	<form action="{{ url_for('admin.links_add') }}" id="link-add-form" method="POST">
+		<div class="row">
+			<div class="col-2">
+				{{ link_add_form.name(class="form-control rounded h-100", placeholder="name...") }}
+			</div>
+			<div class="col-4">
+				{{ link_add_form.link(class="form-control rounded h-100", placeholder="link...") }}
+			</div>
+			<div class="col-5">
+				{{ link_add_form.description(class="form-control rounded mr-3 h-100", placeholder="description...") }}
+			</div>
+			<div class="col-1">
+				<span class="search-group-btn">
+					<button class="btn btn-lg btn-search" type="submit">
+						<i class="iconfont icon-add"></i>
+					</button>
+				</span>
+			</div>
+			{{ link_add_form.csrf_token }}
+		</div>
+	</form>
+</div>
+
+
 <div class="container">
-	Links.
+	<table class="admin-table" id="admin-links-table">
+	</table>
 </div>

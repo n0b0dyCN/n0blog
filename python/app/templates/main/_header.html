@@ -1,16 +1,16 @@
 <div class="container">
-	<h1>{{ meta.title }}</h1>
+	<h1>{{ post.title }}</h1>
 	<div class="meta">
 		<div class="date">
 			<ul class="list-inline">
 				<li class="list-inline-item pr2"><i class="iconfont icon-time"></i></li>
-				<li class="list-inline-item pr2">{{ meta.date }}</li>
+				<li class="list-inline-item pr2">{{ post['timestamp'] }}</li>
 			</ul>
 		</div>
 		<div class="tags">
 			<ul class="list-inline">
 				<li class="list-inline-item pr-2"><i class="iconfont icon-tag"></i></li>
-				{% for tag in meta.tags %}
+				{% for tag in post['tags'] %}
 				<li class="list-inline-item pr-2">{{ tag }}</li>
 				{% endfor %}
 			</ul>

@@ -5,3 +5,8 @@ from wtforms import ValidationError
 
 class AdminLoginForm(FlaskForm):
     password = StringField("Password")
+
+class LinkAddForm(FlaskForm):
+    name = StringField("name")
+    link = StringField("link")
+    description = StringField("description")
