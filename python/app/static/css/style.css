@@ -98,6 +98,7 @@ body h1 {
 
 .archive .archive-list .archive-item a {
 	color: #eaeaea;
+	font-size: 18px;
 }
 
 .archive .archive-list .archive-item a:hover {
@@ -109,6 +110,33 @@ body h1 {
 
 .archive .archive-list .archive-item .meta {
 	color: #666;
+	font-size: 16px;
+}
+
+.pagination {
+	text-align: center;
+}
+
+.pagination .archive-pagination {
+	line-height: 1.725;
+	max-width: 768px;
+	display: block;
+	list-style-type: disc;
+}
+
+.pagination .archive-pagination .archive-page-item {
+	display: inline-block;
+	margin: 0 .2em
+}
+
+.pagination .archive-pagination .archive-page-item a {
+	color: #eaeaea;
+	border: 1px solid #eaeaea;
+	border-radius: 0.25em;
+	display: inline-block;
+	user-select: none;
+	padding: 0 .5em;
+	font-size: 14px;
 }
 
 .links .links-list .links-item a {

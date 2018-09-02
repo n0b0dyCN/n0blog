@@ -43,9 +43,9 @@
 	{% for post in posts %}
 		<li class="my-2 archive-item">
 			<span class="meta">
-			{{ post['timestamp'] }}
+			{{ post.date }}
 			</span>
-			<a class="mx-4" href="{{ url_for('main.post', title=post['title']) }}">{{ post['title'] }}</a>
+			<a class="mx-4" href="{{ url_for('main.post', title=post.title) }}">{{ post.title }}</a>
 		</li>
 	{% endfor %}
 	</ul>

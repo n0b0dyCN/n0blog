@@ -39,6 +39,10 @@ class Post(db.Model):
         d['tags'] = [t.txt for t in self.tags]
         return d
 
+    @property
+    def date(self):
+        return self.timestamp.strftime("%b %d, %Y")
+
 class Tag(db.Model):
     __tablename__ = 'tags'
     id = db.Column(db.Integer, primary_key=True)

@@ -17,7 +17,7 @@ from ..markdown_util import render_md_raw, add_or_update_post
 def index():
     posts = Post.query.filter_by(show=True).order_by(Post.timestamp).limit(10).all()
     print(posts)
-    return render_template('main/index.html', posts=[ p.to_dict() for p in posts ])
+    return render_template('main/index.html', posts=posts)
 
 @main.route('/resume', methods=['GET'])
 def resume():
@@ -25,14 +25,18 @@ def resume():
     print ("RESUME")
     print (p)
     if p:
-        return render_template('main/post.html', post=p.to_dict())
+        return render_template('main/post.html', post=p)
     else:
         return render_template('error/404.html'), 404
 
 @main.route('/archive', methods=['GET'])
 def archive():
-    return "archive"
-    return render_template('main/archives.html')
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=10, error_out=False)
+    posts = pagination.items
+    print ("ARCHIVE")
+    print (posts)
+    return render_template('main/archive.html', posts=posts, pagination=pagination)
 
 @main.route('/links', methods=['GET'])
 def links():
@@ -51,7 +55,7 @@ def test():
 def post(title):
     p = Post.query.filter_by(title=title, show=True).first()
     if p:
-        return render_template('main/post.html', post=p.to_dict())
+        return render_template('main/post.html', post=p)
     else:
         return render_template('error/404.html')
 
