@@ -7,8 +7,9 @@ import os
 import imghdr
 
 from . import main
+from .forms import CommentForm
 from .. import db
-from ..models import Post, Comment, Link
+from ..models import Post, Comment, Link, Tag
 
 from ..markdown_util import render_md_raw, add_or_update_post
 
@@ -16,14 +17,12 @@ from ..markdown_util import render_md_raw, add_or_update_post
 @main.route('/', methods=['GET'])
 def index():
     posts = Post.query.filter_by(show=True).order_by(Post.timestamp).limit(10).all()
-    print(posts)
     return render_template('main/index.html', posts=posts)
 
 @main.route('/resume', methods=['GET'])
 def resume():
+    return post("resume")
     p = Post.query.filter_by(title='resume', show=True).first()
-    print ("RESUME")
-    print (p)
     if p:
         return render_template('main/post.html', post=p)
     else:
@@ -34,8 +33,6 @@ def archive():
     page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=10, error_out=False)
     posts = pagination.items
-    print ("ARCHIVE")
-    print (posts)
     return render_template('main/archive.html', posts=posts, pagination=pagination)
 
 @main.route('/links', methods=['GET'])
@@ -43,22 +40,35 @@ def links():
     links = Link.query.all()
     return render_template('main/links.html', links=links)
 
-@main.route('/search', methods=["GET"])
-def search():
-    return render_template('main/search.html')
-
-@main.route('/test', methods=['GET'])
-def test():
-    return ""
-
-@main.route('/post/<string:title>/')
+@main.route('/post/<string:title>/', methods=["GET", "POST"])
 def post(title):
     p = Post.query.filter_by(title=title, show=True).first()
-    if p:
-        return render_template('main/post.html', post=p)
-    else:
+    if not p:
         return render_template('error/404.html')
+    comment_form = CommentForm(post=str(p.id))
+    if comment_form.validate_on_submit():
+        print(comment_form)
+        print(request.form)
+        c = Comment(
+            name=comment_form.name.data,
+            email=comment_form.email.data,
+            url=comment_form.url.data,
+            content=comment_form.content.data
+        )
+        p.comments.append(c)
+        db.session.commit()
+    comments = p.comments.all()
+    return render_template(
+        'main/post.html',
+        post=p,
+        comment_form=comment_form,
+        comments=comments
+    )
 
+@main.route('/tag/<string:txt>')
+def tag(txt):
+    posts = Tag.query.filter_by(txt=txt).first().posts.all()
+    return render_template('main/tag.html', posts=posts)
 
 @main.route('/post/<string:title>/<string:img_name>')
 def post_images(title, img_name):
@@ -77,3 +87,12 @@ def post_images(title, img_name):
         )
     else:
         return render_template("error/403.html"), 403
+
+@main.route('/search', methods=["GET"])
+def search():
+    return render_template('main/search.html')
+
+@main.route('/test', methods=['GET'])
+def test():
+    return ""
+

@@ -1,0 +1,24 @@
+<!-- Post List -->
+
+<div class="container my-4 archive">
+	<ul class="list-unstyled archive-list">
+	{% for post in posts %}
+		<li class="my-2 archive-item">
+			<span class="meta">
+			{{ post.date }}
+			</span>
+			<span>
+				<a class="mx-4" href="{{ url_for('main.post', title=post.title) }}">{{ post.title }}</a>
+			<span>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+
+{% if pagination %}
+<div class="container my-5 pagination">
+	{{ pg.pagination_widget(pagination, 'main.archive') }}
+</div>
+{% endif %}
+
+<!-- End Post List -->

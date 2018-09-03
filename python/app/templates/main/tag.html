@@ -1,17 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'main/base.html' %}
 
 {% block title %}
-n0blog - archive
+n0blog - tag
 {% endblock %}
 
 {% block header %}
-<h1>Archives</h1>
+<h1>Tag: {{ t.txt }}</h1>
 {% endblock %}
-
-{% import "main/_pagination.html" as pg %} 
 
 {% block page_content %}
-
 {% include "main/_post_list.html" %}
-
 {% endblock %}
+

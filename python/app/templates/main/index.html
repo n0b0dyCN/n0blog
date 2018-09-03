@@ -36,19 +36,6 @@
 	</form>
 </div>
 
-<!-- article list -->
-<h2 class="mt-5 mb-4">Archives</h1>
-<div class="container my-4 archive">
-	<ul class="list-unstyled archive-list">
-	{% for post in posts %}
-		<li class="my-2 archive-item">
-			<span class="meta">
-			{{ post.date }}
-			</span>
-			<a class="mx-4" href="{{ url_for('main.post', title=post.title) }}">{{ post.title }}</a>
-		</li>
-	{% endfor %}
-	</ul>
-</div>
+{% include "main/_post_list.html" %}
 
 {% endblock %}

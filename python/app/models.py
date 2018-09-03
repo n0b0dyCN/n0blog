@@ -57,10 +57,17 @@ class Tag(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    msg = db.Column(db.Text)
+    name = db.Column(db.Text)
+    email = db.Column(db.Text)
+    url = db.Column(db.Text)
+    content = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    show = db.Column(db.Boolean)
+    show = db.Column(db.Boolean, default=True)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    @property
+    def time(self):
+        return self.timestamp.strftime("%b %d, %Y  %H:%M")
 
 class Link(db.Model):
     __tablename__ = 'links'

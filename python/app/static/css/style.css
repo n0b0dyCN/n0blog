@@ -96,6 +96,8 @@ body h1 {
 	color: #caa851;
 }
 
+/* archive list */
+
 .archive .archive-list .archive-item a {
 	color: #eaeaea;
 	font-size: 18px;
@@ -112,6 +114,8 @@ body h1 {
 	color: #666;
 	font-size: 16px;
 }
+
+/* pagination */
 
 .pagination {
 	text-align: center;
@@ -139,6 +143,8 @@ body h1 {
 	font-size: 14px;
 }
 
+/* nav link */
+
 .links .links-list .links-item a {
 	color: #eaeaea;
 }
@@ -163,6 +169,44 @@ body h1 {
 .btn-search {
 	background: #b5e853;
 }
+
+.btn-submit {
+	background: #28a745;
+}
+
+/* reply list */
+.reply {
+	color: #eaeaea;
+	max-width: 980px;
+	min-width: 200px;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	border-top: 1px dashed #b5e853;
+}
+
+.reply .reply-item i {
+	color: #caa851;
+	font-size: 120%;
+}
+
+.reply .reply-list .comment-title .comment-name {
+	color: #2bbc8a;
+	border-bottom: 1px dashed #2bbc8a;
+	margin-right: 2rem;
+}
+
+.reply .reply-list .comment-title .comment-name:hover {
+	color: #28a745;
+	text-decoration: none;
+	border-bottom: 1px dashed #2bbc8a;
+}
+
+.reply .comment-title .comment-time {
+	color: #666;
+	margin-left: 2rem;
+}
+
+/* admin panel */
 
 .admin-table .btn-green {
 	background: #b5e853;

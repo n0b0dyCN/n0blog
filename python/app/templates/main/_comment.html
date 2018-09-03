@@ -1,0 +1,46 @@
+<div class="container reply" id="reply-list">
+	<h2>Replies</h2>
+	<div class="mx-1">
+		<div class="reply-list" id="reply-list">
+			{% if comments %}
+			{% for comment in comments %}
+			<div class="reply-item my-3 row" id="comment-{{ comment.id }}">
+				<div class="col-1"><i class="iconfont icon-comment"></i></div>
+				<div class="col">
+					<p class="comment-title">
+						<a class="comment-name" target="_blank" href="{% if comment.url == ""%}#{% else %}{{ comment.url }}{% endif %}">{{ comment.name }}</a>
+						<span class="comment-time">{{ comment.time }}</span>
+					</p>
+					<p class="comment-content">
+						{{ comment.content }}
+					</p>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+		<form method="POST", enctype="multipart/form-data" action="#reply" id="reply">
+			{{ comment_form.content(class="reply-content rounded h-100 w-100", placeholder="comment...", rows="2") }}
+			<div class="row">
+				<div class="col-4">
+					{{ comment_form.name(class="form-control rounded h-100", placeholder="name...") }}
+				</div>
+				<div class="col-4">
+					{{ comment_form.url(class="form-control rounded h-100", placeholder="link...") }}
+				</div>
+				<div class="col-4">
+					{{ comment_form.email(class="form-control rounded h-100", placeholder="email...") }}
+				</div>
+			</div>
+			{{ comment_form.post }}
+			{{ comment_form.csrf_token }}
+			<div class="clearfix"></div>
+			<button class="btn btn-submit w-100 my-2" type="submit" >
+				<span>submit!</span>
+				<!--
+				<i class="iconfont icon-tick"></i>
+				-->
+			</button>
+		</form>
+	</div>
+</div>
