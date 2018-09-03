@@ -57,7 +57,7 @@ def post(title):
         )
         p.comments.append(c)
         db.session.commit()
-    comments = p.comments.all()
+    comments = p.comments.filter_by(show=True).all()
     return render_template(
         'main/post.html',
         post=p,

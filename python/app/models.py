@@ -69,6 +69,19 @@ class Comment(db.Model):
     def time(self):
         return self.timestamp.strftime("%b %d, %Y  %H:%M")
 
+    def to_dict(self):
+        d = {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "url": self.url,
+            "content": self.content,
+            "time": self.time,
+            "show": self.show,
+            "post_title": self.post.title
+        }
+        return d
+
 class Link(db.Model):
     __tablename__ = 'links'
     id = db.Column(db.Integer, primary_key=True)

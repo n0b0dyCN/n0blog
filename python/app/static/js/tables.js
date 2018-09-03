@@ -165,6 +165,88 @@ function links_table_init() {
 	})
 };
 
+
+function comments_table_init() {
+	var $comments_table = $("#admin-comments-table");
+	$comments_table.bootstrapTable({
+		url: "/admin/api/comments/getcomments",
+		methods: "POST",
+		contentType: "application/x-www-form-urlencoded",
+		dataType: "json",
+		striped: true,
+		uniqueID: "id",
+		showRefresh: true,
+		undefinedText: "-",
+		sidePagination: "server",
+		pageSize: 20,
+		pageList: "[10, 20, 50, 80, 100]",
+		paginationFirstText: "First Page",
+		paginationPreText: "Previous",
+		paginationNextText: "Next",
+		paginationLastText: "Last Page",
+		iconsPrefix: 'iconfont',
+		icons: {
+			refresh: 'icon-refresh'
+		},
+		columns: [
+			{
+				field: 'post_title',
+				title: 'post',
+				align: 'center', valign: 'middle'
+			}, {
+				field: 'name',
+				title: 'name',
+				align: 'center', valign: 'middle',
+				formatter: function(value, row, index, field) {
+					s = '';
+					s += '<a href="' + row['url'] + '">' + value + '</a>';
+					s += '<p>' + row['email'] + '</p>';
+					return s;
+				}
+			}, {
+				field: 'time',
+				title: 'time',
+				align: 'center', valign: 'middle'
+			}, {
+				field: 'content',
+				title: 'content',
+				align: 'center', valign: 'middle'
+			}, {
+				field: 'show',
+				title: 'action',
+				align: 'center', valign: 'middle',
+				formatter: function(value, row, index, field) {
+					s = '';
+					if (value == true) {
+						s += '<button class="btn mx-1" id="show"><i class="iconfont icon-show"></i></button>';
+					} else {
+						s += '<button class="btn mx-1" id="hide"><i class="iconfont icon-hide"></i></button>';
+					}
+					s += '<button class="btn mx-1" id="delete"><i class="iconfont icon-delete"></i></button>';
+					return s;
+				},
+				events: {
+					'click #show': function(e, value, row, index) {
+						$.post('/admin/api/comments/hide', row, function(){
+							$comments_table.bootstrapTable('refresh');
+						});
+					},
+					'click #hide': function(e, value, row, index) {
+						$.post('/admin/api/comments/show', row, function(){
+							$comments_table.bootstrapTable('refresh');
+						});
+					},
+					'click #delete': function(e, value, row, index) {
+						$.post('/admin/api/comments/delete', row, function(){
+							$comments_table.bootstrapTable('refresh');
+						});
+					}
+				}
+			}
+		]
+	})
+};
+
 function init_links_add_table() {
 	$("#link-add-form").submit(function(event){
 		event.preventDefault();
@@ -183,4 +265,5 @@ function init_links_add_table() {
 
 posts_table_init();
 links_table_init();
+comments_table_init();
 init_links_add_table();
