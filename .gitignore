@@ -8,7 +8,7 @@ sql/postgres-data/
 sql/data/
 
 #ignore test posts
-posts/
+posts/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
