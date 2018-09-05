@@ -33,7 +33,7 @@ docker-compose up --build
 * For safety reason, static resources reference inside markdown file besides picture is not allowed.
 
 ## Todo
-- [  ] Add nginx support
-- [  ] Add post delete function
-- [  ] Add redis support
-- [  ] Remove not used libiraries.
+- [ ] Add nginx support
+- [ ] Add post delete function
+- [ ] Add redis support
+- [ ] Remove not used libiraries.
