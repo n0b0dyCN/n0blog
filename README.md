@@ -13,6 +13,7 @@ Personal blog for those who knowns how to use docker and scp.
 ```
 git clone https://github.com/n0b0dyCN/n0blog.git
 cd n0blog
+mkdir posts
 docker-compose up --build
 ```
 
