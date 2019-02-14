@@ -49,13 +49,13 @@ def add_or_update_post(path, commit=False):
     insert = (p==None)
     if insert:
         p = Post()
+        p.show = False
     p.path = path
     p.title = meta['title']
     p.body = raw
     p.body_html = html
     p.tags = [ Tag.fromTxt(t) for t in meta['tags'] ]
     p.isexist = True
-    p.show = False
     if insert:
         db.session.add(p)
     if commit:

@@ -1,6 +1,7 @@
 from flask import render_template, redirect, url_for, abort, flash, request, send_from_directory
 from flask import current_app, make_response
 from flask_sqlalchemy import get_debug_queries
+from sqlalchemy import and_
 
 from markdown import Markdown
 import os
@@ -16,7 +17,7 @@ from ..markdown_util import render_md_raw, add_or_update_post
 
 @main.route('/', methods=['GET'])
 def index():
-    posts = Post.query.filter_by(show=True).order_by(Post.timestamp).limit(10).all()
+    posts = Post.query.filter(and_(Post.title!="resume", Post.title!="about")).filter_by(show=True).order_by(Post.timestamp).limit(10).all()
     return render_template('main/index.html', posts=posts)
 
 @main.route('/resume', methods=['GET'])
@@ -31,7 +32,7 @@ def resume():
 @main.route('/archive', methods=['GET'])
 def archive():
     page = request.args.get('page', 1, type=int)
-    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=10, error_out=False)
+    pagination = Post.query.filter(and_(Post.title!="resume", Post.title!="about")).filter_by(show=True).order_by(Post.timestamp.desc()).paginate(page, per_page=10, error_out=False)
     posts = pagination.items
     return render_template('main/archive.html', posts=posts, pagination=pagination)
 
