@@ -13,8 +13,6 @@ def getlinks():
 
 @admin.route("/api/links/add", methods=["POST"])
 def links_add():
-    print("Links add")
-    print(request.form)
     l = Link()
     l.name = request.form["name"]
     l.link = request.form["link"]
