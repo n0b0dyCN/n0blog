@@ -54,6 +54,7 @@ def post(title):
     if not p:
         return render_template('error/404.html')
     comment_form = CommentForm(post=str(p.id))
+    print(request.method)
     if comment_form.validate_on_submit():
         print(comment_form)
         print(request.form)

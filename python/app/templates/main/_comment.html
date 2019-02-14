@@ -24,18 +24,27 @@
 			<div class="row">
 				<div class="col-4">
 					{{ comment_form.name(class="form-control rounded h-100", placeholder="name...") }}
+					{% for err in comment_form.name.errors %}
+					<script>alert("{{ err }}");</script>
+					{% endfor %}
 				</div>
 				<div class="col-4">
 					{{ comment_form.url(class="form-control rounded h-100", placeholder="link...") }}
+					{% for err in comment_form.url.errors %}
+					<script>alert("{{ err }}");</script>
+					{% endfor %}
 				</div>
 				<div class="col-4">
 					{{ comment_form.email(class="form-control rounded h-100", placeholder="email...") }}
+					{% for err in comment_form.email.errors %}
+					<script>alert("{{ err }}");</script>
+					{% endfor %}
 				</div>
+				{{ comment_form.post }}
+				{{ comment_form.csrf_token }}
 			</div>
-			{{ comment_form.post }}
-			{{ comment_form.csrf_token }}
 			<div class="clearfix"></div>
-			<button class="btn btn-submit w-100 my-2" type="submit" >
+			<button class="btn btn-submit w-100 my-2" type="submit">
 				<span>submit!</span>
 				<!--
 				<i class="iconfont icon-tick"></i>
