@@ -2,7 +2,7 @@
 
 source venv/bin/activate
 
-sleep 10
+sleep 4
 
 flask db init
 flask db migrate

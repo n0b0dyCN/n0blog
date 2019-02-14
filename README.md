@@ -59,8 +59,9 @@ Just add a post with title "resume".
 
 ## Todo
 
-* [ ] Comment showing
+* [x] Comment showing
 * [ ] Add post delete function
 * [ ] Add redis support
 * [ ] Remove not used libiraries
 * [ ] Intra-article navigation
+* [ ] Tag cloud
