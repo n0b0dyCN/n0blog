@@ -47,8 +47,10 @@ function posts_table_init() {
 				},
 				events: {
 					'click #refresh': function (e, value, row, index) {
-						alert("refresh: "+JSON.stringify(row));
-						$.post("/admin/api/posts/refresh", {path:row['path']});
+						$.post("/admin/api/posts/refresh", {path:row['path']}, function(ret_data){
+							//console.log(ret_data);
+							alert("refresh: " + ret_data.status);
+						});
 						$posts_table.bootstrapTable('refresh');
 					}
 				}
@@ -67,13 +69,17 @@ function posts_table_init() {
 				},
 				events: {
 					'click #hide': function (e, value, row, index) {
-						alert("hide: "+JSON.stringify(row));
-						$.post("/admin/api/posts/show", {title:row['title']});
+						$.post("/admin/api/posts/show", {title:row['title']}, function(ret_data){
+							//console.log(ret_data);
+							alert("show: " + ret_data.status);
+						});
 						$posts_table.bootstrapTable('refresh');
 					},
 					'click #show': function (e, value, row, index) {
-						alert("hide: "+JSON.stringify(row));
-						$.post("/admin/api/posts/hide", {title:row['title']});
+						$.post("/admin/api/posts/hide", {title:row['title']}, function(ret_data){
+							//console.log(ret_data);
+							alert("hide: " + ret_data.status);
+						});
 						$posts_table.bootstrapTable('refresh');
 					}
 				}

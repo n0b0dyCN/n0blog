@@ -35,7 +35,7 @@ def getposts():
 
 @admin.route("/api/posts/refresh", methods=["POST"])
 def posts_refresh():
-    if 'title' not in request.form:
+    if 'path' not in request.form:
         return jsonify({'status':'failed'})
     title = request.form['path']
     if add_or_update_post(title, commit=True):
