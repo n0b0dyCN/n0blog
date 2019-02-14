@@ -7,6 +7,7 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     FLASKY_MAIL_SUBJECT_PREFIX = '[ n0Blog ]'
     FLASKY_MAIL_SENDER = 'n0b0dy'
+    REDIS_URL = os.environ.get('REDIS_URL') or ''
 
     @staticmethod
     def init_app(app):

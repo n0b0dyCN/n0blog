@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, \
 
 from . import admin
 from .. import db
+from .. import redis as cache
 from ..models import Post, Tag, Comment, Link
 
 @admin.route("/api/comments/getcomments")
@@ -18,6 +19,7 @@ def comments_hide():
         return jsonify({"status":"failed"})
     c.show = False
     db.session.commit()
+    cache.delete_post(c.post.title)
     return jsonify({"status":"ok"})
 
 @admin.route("/api/comments/show", methods=["POST"])
@@ -27,6 +29,7 @@ def comments_show():
         return jsonify({"status":"failed"})
     c.show = True
     db.session.commit()
+    cache.delete_post(c.post.title)
     return jsonify({"status":"ok"})
 
 @admin.route("/api/comments/delete", methods=["POST"])
@@ -36,5 +39,6 @@ def comments_delete():
         return jsonify({"status":"failed"})
     db.session.delete(c)
     db.session.commit()
+    cache.delete_post(c.post.title)
     return jsonify({"status":"ok"})
 

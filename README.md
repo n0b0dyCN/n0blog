@@ -60,8 +60,9 @@ Just add a post with title "resume".
 ## Todo
 
 * [x] Comment showing
-* [ ] Add post delete function
-* [ ] Add redis support
+* [x] Add post delete function
+* [x] Add redis support
 * [ ] Remove not used libiraries
 * [ ] Intra-article navigation
 * [ ] Tag cloud
+* [ ] Refactoring function `add_or_update_post`

@@ -6,8 +6,11 @@ from flask_wtf.csrf import CSRFProtect
 
 from config import config
 
+from .ext.redis import FlaskRedis
+
 db = SQLAlchemy()
 csrf = CSRFProtect()
+redis = FlaskRedis()
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -15,10 +18,9 @@ def create_app(config_name):
     config[config_name].init_app(app)
 
     # init app with extensions
-    # bootstrap.init_app(app)
-    # moment.init_app(app)
     db.init_app(app)
     csrf.init_app(app)
+    redis.init_app(app)
 
     # register blueprint
     from .main import main as main_blueprint

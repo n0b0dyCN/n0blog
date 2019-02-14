@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, \
 
 from . import admin
 from .. import db
+from .. import redis as cache
 from ..models import Post, Tag, Comment, Link
 from ..markdown_util import render_md_file, render_md_raw, \
         add_or_update_post, make_show, make_hide, delete_post
@@ -16,6 +17,7 @@ def getposts():
     for p in db_posts:
         path_post_dict[p.path] = p
         if not os.path.isdir(os.path.join(os.getenv("POSTS_PATH"), p.path)):
+            #cache.delete_post(p.title)
             p.exists = False
     for t in os.listdir(os.getenv("POSTS_PATH")):
         folder_path = os.path.join(os.getenv("POSTS_PATH"), t)
@@ -30,14 +32,14 @@ def getposts():
     except Exception as e:
         print(e)
         return ""
-    return jsonify([p.to_dict() for p in Post.query.all()])
+    return jsonify([p.to_dict() for p in Post.query.order_by(Post.timestamp).all()])
 
 @admin.route("/api/posts/refresh", methods=["POST"])
 def posts_refresh():
     if 'path' not in request.form:
         return jsonify({'status':'failed'})
-    title = request.form['path']
-    if add_or_update_post(title, commit=True):
+    path = request.form['path']
+    if add_or_update_post(path, commit=True):
         return jsonify({'status':'ok'})
     else:
         return jsonify({'status':'failed'})
@@ -47,6 +49,7 @@ def posts_hide():
     if 'title' not in request.form:
         return jsonify({'status':'failed'})
     title = request.form['title']
+    cache.delete_post(title)
     if make_hide(title):
         return jsonify({'status':'ok'})
     else:
@@ -57,6 +60,7 @@ def posts_show():
     if 'title' not in request.form:
         return jsonify({'status':'failed'})
     title = request.form['title']
+    cache.delete_post(title)
     if make_show(title):
         return jsonify({'status':'ok'})
     else:
@@ -67,6 +71,7 @@ def posts_del():
     if 'title' not in request.form:
         return jsonify({'status':'failed'})
     title = request.form['title']
+    cache.delete_post(title)
     delete_post(title, commit=True)
     return jsonify({"status":"ok"})
 

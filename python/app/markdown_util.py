@@ -4,6 +4,7 @@ from markdown import Markdown
 
 from .models import Post, Tag
 from . import db
+from . import redis as cache
 
 def render_md_raw(raw):
     config = {
@@ -58,6 +59,8 @@ def add_or_update_post(path, commit=False):
     p.isexist = True
     if insert:
         db.session.add(p)
+    else:
+        cache.delete_post(p.title)
     if commit:
         db.session.commit()
     return True

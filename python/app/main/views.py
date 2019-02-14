@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, abort, flash, request, sen
 from flask import current_app, make_response
 from flask_sqlalchemy import get_debug_queries
 from sqlalchemy import and_, or_
+from functools import wraps
 
 from markdown import Markdown
 import os
@@ -10,12 +11,28 @@ import imghdr
 from . import main
 from .forms import CommentForm
 from .. import db
+from .. import redis as cache
 from ..models import Post, Comment, Link, Tag
 
 from ..markdown_util import render_md_raw, add_or_update_post
 
+def cached(timeout=600, key='main_view_%s'):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            cache_key = key % request.path
+            rv = cache.get(cache_key)
+            if rv is not None:
+                print("Cached ", cache_key)
+                return rv
+            rv = f(*args, **kwargs)
+            cache.set(cache_key, rv, timeout=timeout)
+            return rv
+        return decorated_function
+    return decorator
 
 @main.route('/', methods=['GET'])
+@cached()
 def index():
     posts = Post.query \
                 .filter(and_(Post.title!="resume", Post.title!="about")) \
@@ -25,6 +42,7 @@ def index():
     return render_template('main/index.html', posts=posts)
 
 @main.route('/resume', methods=['GET'])
+@cached()
 def resume():
     return post("resume")
     p = Post.query.filter_by(title='resume', show=True).first()
@@ -34,6 +52,7 @@ def resume():
         return render_template('error/404.html'), 404
 
 @main.route('/archive', methods=['GET'])
+@cached()
 def archive():
     page = request.args.get('page', 1, type=int)
     pagination = Post.query \
@@ -44,11 +63,13 @@ def archive():
     return render_template('main/archive.html', posts=posts, pagination=pagination)
 
 @main.route('/links', methods=['GET'])
+@cached()
 def links():
     links = Link.query.all()
     return render_template('main/links.html', links=links)
 
 @main.route('/post/<string:title>/', methods=["GET", "POST"])
+@cached()
 def post(title):
     p = Post.query.filter_by(title=title, show=True).first()
     if not p:
@@ -72,6 +93,7 @@ def post(title):
     )
 
 @main.route('/tag/<string:txt>')
+@cached()
 def tag(txt):
     posts = Tag.query.filter_by(txt=txt).first().posts
     return render_template('main/tag.html', posts=posts, tag=txt)
@@ -95,6 +117,7 @@ def post_images(title, img_name):
         return render_template("error/403.html"), 403
 
 @main.route('/search', methods=["GET"])
+@cached()
 def search():
     page = request.args.get('page', 1, type=int)
     q = request.args.get("s")
