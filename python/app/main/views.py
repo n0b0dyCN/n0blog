@@ -73,8 +73,8 @@ def post(title):
 
 @main.route('/tag/<string:txt>')
 def tag(txt):
-    posts = Tag.query.filter_by(txt=txt).first().posts.all()
-    return render_template('main/tag.html', posts=posts)
+    posts = Tag.query.filter_by(txt=txt).first().posts
+    return render_template('main/tag.html', posts=posts, tag=txt)
 
 @main.route('/post/<string:title>/<string:img_name>')
 def post_images(title, img_name):

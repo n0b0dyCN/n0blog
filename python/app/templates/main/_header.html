@@ -11,7 +11,7 @@
 			<ul class="list-inline">
 				<li class="list-inline-item pr-2"><i class="iconfont icon-tag"></i></li>
 				{% for tag in post.tags %}
-				<li class="list-inline-item pr-2">{{ tag.txt }}</li>
+				<li class="list-inline-item pr-2"><a style="color:#eaeaea" href="{{ url_for('main.tag', txt=tag.txt) }}">{{ tag.txt }}</a></li>
 				{% endfor %}
 			</ul>
 		</div>
