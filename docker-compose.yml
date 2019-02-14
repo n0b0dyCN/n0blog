@@ -3,16 +3,19 @@ version: "3"
 services:
     sql:
         container_name: sql
-        restart: always
+        # restart: always
         image: postgres:latest
         volumes:
-            - ./sql/data:/var/lib/postgresql/data/pgdata
+            # - ./sql/data:/var/lib/postgresql/data
+            - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             - POSTGRES_PASSWORD=n0blog
             - POSTGRES_USER=n0blog
     n0blog:
         container_name: n0blog
         build: ./python
+        depends_on:
+            - sql
         volumes:
             - ./python/app:/home/n0blog/app
               #- ./python/migrations:/home/n0blog/migrations

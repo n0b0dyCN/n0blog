@@ -22,7 +22,7 @@ def render_md_raw(raw):
     meta['title'] = md.Meta.get('title', ['Untitled'])[0]
     meta['summary'] = md.Meta.get('summary', ['Unsummarized'])[0]
     meta['tags'] = [tag.strip() for tag in md.Meta.get('tags', [''])[0].split(',')]
-    meta['date'] = md.Meta.get('date', ['Date not set'])[0]
+    #meta['date'] = md.Meta.get('date', ['Date not set'])[0]
     return raw, html, meta
 
 def render_md_file(foldername):
@@ -43,19 +43,22 @@ def add_or_update_post(path, commit=False):
     if not os.path.exists(md_path):
         return False
     raw, html, meta = render_md_file(md_path)
+    print(meta)
     p = Post.query.filter_by(path=path).first()
+    print(p)
     insert = (p==None)
     if insert:
         p = Post()
+    print("Insert:", insert)
     p.path = path
     p.title = meta['title']
     p.body = raw
     p.body_html = html
-    p.date = meta['date']
+    #p.date = meta['date']
     p.tags = [ Tag.fromTxt(t) for t in meta['tags'] ]
     p.isexist = True
     p.show = False
-    if insert:
+    if not insert:
         db.session.add(p)
     if commit:
         db.session.commit()

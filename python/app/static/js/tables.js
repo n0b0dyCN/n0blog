@@ -48,7 +48,7 @@ function posts_table_init() {
 				events: {
 					'click #refresh': function (e, value, row, index) {
 						alert("refresh: "+JSON.stringify(row));
-						$.post("/admin/api/posts/refresh", {title:row['title']});
+						$.post("/admin/api/posts/refresh", {path:row['path']});
 						$posts_table.bootstrapTable('refresh');
 					}
 				}

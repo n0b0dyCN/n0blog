@@ -37,7 +37,7 @@ def getposts():
 def posts_refresh():
     if 'title' not in request.form:
         return jsonify({'status':'failed'})
-    title = request.form['title']
+    title = request.form['path']
     if add_or_update_post(title, commit=True):
         return jsonify({'status':'ok'})
     else:
