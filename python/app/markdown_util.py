@@ -63,7 +63,6 @@ def add_or_update_post(path, commit=False):
     return True
 
 def make_show_hide(title, show):
-    print ("Make {} {}".format(title, 'show' if show else 'hide'))
     p = Post.query.filter_by(title=title).first()
     if not p:
         return False

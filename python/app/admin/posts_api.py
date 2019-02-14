@@ -24,7 +24,6 @@ def getposts():
         if t in path_post_dict:
             path_post_dict[t].exists = True
             continue
-        print ("Add new posts")
         add_or_update_post(t, commit=False)
     try:
         db.session.commit()
