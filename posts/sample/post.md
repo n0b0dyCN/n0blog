@@ -1,3 +1,7 @@
+title: Sample
+summary: A sample markdown file for test.
+tags: markdown
+
 # n0blog
 
 Personal blog for those who knowns how to use docker and scp.
@@ -45,11 +49,11 @@ docker-compose up --build
 5. Visit `http://your.personal.domain/admin`, enter password you set in `docker-compose.yml`, and set the new post visiable in posts tab.
 6. Wait for people reading!
 
-In this repo, we provide a sample post `./posts/sample/`. The content of the post is just this readme file.
+In this repo, we provide a sample post `./posts/sample/`.
 
 #### Note
 
-* All pictures you used in your post should be in the same folder with `post.md`, and you can just use the relative path to insert picture in the markdown file:
+* All pictures you used in your post should be in the same folder with `post.md`, And you can just use the relative path to insert picture in the markdown file:
 
 ``` markdown
 ![A example picture]("example.png")
