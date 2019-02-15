@@ -42,10 +42,9 @@ def index():
 @main.route('/resume', methods=['GET'])
 @cached()
 def resume():
-    return post("resume")
     p = Post.query.filter_by(title='resume', show=True).first()
     if p:
-        return render_template('main/post.html', post=p)
+        return render_template('main/resume.html', post=p)
     else:
         return render_template('error/404.html'), 404
 
