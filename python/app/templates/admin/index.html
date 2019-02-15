@@ -29,6 +29,9 @@ n0blog - admin panel
 		<a class="nav-item nav-link" id="nav-links-tab" data-toggle="tab" href="#nav-links" role="tab" aria-controls="nav-links" aria-selected="false">
 			Links
 		</a>
+		<a class="nav-item nav-link" id="nav-backup-tab" data-toggle="tab" href="#nav-backup" role="tab" aria-controls="nav-backup" aria-selected="false">
+			Backup
+		</a>
 	</div>
 </nav>
 
@@ -45,6 +48,9 @@ n0blog - admin panel
 	<div class="tab-pane fade" id="nav-links" role="tabpanel" aria-labelledby="nav-links-tab">
 		{% include "admin/links.html" %}
 	</div>
+	<div class="tab-pane fade" id="nav-backup" role="tabpanel" aria-labelledby="nav-backup-tab">
+		{% include "admin/backup.html" %}
+	</div>
 </div>
 
 {% endblock %}
@@ -57,5 +63,6 @@ n0blog - admin panel
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script src="//rawgit.com/wenzhixin/bootstrap-table/master/src/extensions/editable/bootstrap-table-editable.js"></script>
 	<script src="{{ url_for('static', filename='js/bootstrap-editable.js') }}"></script>
-	<script src="{{ url_for("static", filename="js/tables.js") }}"></script>
+	<script src="{{ url_for('static', filename='js/tables.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/backup.js') }}"></script>
 {% endblock %}

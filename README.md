@@ -9,7 +9,8 @@ This blog is inspired by [phithon's blog](https://www.leavesongs.com/) and [defc
 1. Adding post in markdown format.
 2. Posts content searching.
 3. Customized friend links.
-4. An easy to use admin panel helping for posts, comments, friend links management.
+4. An easy to use admin panel helping for posts, comments, friend links management and so on.
+5. Backup and restore.
 
 ## Basic usage
 
@@ -59,6 +60,16 @@ docker-compose up --build
 
 Just add a post with title "resume".
 
+### Backup and restore
+
+The backup is a zip file which contains the posts folder and a `backup.sql` in it.
+
+To backup your data, goto admin panel and select tab `Backup`. Then click the "backup" button to generate a backup file.
+
+To download the newest backup file, click the "download backup" button.
+
+To restore the data, first stop the whole docker compose. Then, unzip the zip file you just downloaded and replace `/posts` the unzipped folder. Finally, restart the docker compose. The script `backup.sql` will be excuted atomatically when n0blog is starting.
+
 ## Todo
 
 * [x] Comment showing
@@ -68,4 +79,16 @@ Just add a post with title "resume".
 * [x] Back to top button
 * [x] Refactoring function `add_or_update_post`
 * [x] Statistics
-* [ ] Easy backup and import
+* [x] Easy backup and restore
+
+# LISENSE
+ 
+The MIT License (MIT)
+
+Copyright (c) 2015 Chris Kibble
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

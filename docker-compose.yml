@@ -29,6 +29,7 @@ services:
             - DEV_DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
             - TEST_DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
             - DATABASE_URL=postgresql://n0blog:n0blog@sql/n0blog
+            - PGPASSWORD=n0blog
             - REDIS_URL=redis://redis/0
             - SECRET_KEY=n0blog
             - FLASK_APP=n0blog

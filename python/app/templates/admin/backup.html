@@ -1,0 +1,20 @@
+<div class="row py-3">
+    <div class="col-md-3">
+        <button class="btn" onclick="get_backup_status();"><i class="iconfont icon-refresh"></i></button>
+    </div>
+    <div>
+        The last back up: <span id="admin-backup-status">None</span>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col-md-3">
+        <button class="btn w-100" onclick="generate_backup();"><span>backup</span></button>
+    </div>
+    <div class="col-md-3">
+        <button class="btn w-100" onclick="window.open('{{ url_for("admin.backup_download") }}')"><span>download backup</span></button>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col" id="admin-backup-result" style="white-space: pre-line;">
+    </div>
+</div>
