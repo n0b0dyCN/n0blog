@@ -67,5 +67,5 @@ Just add a post with title "resume".
 * [x] Remove not used libiraries
 * [x] Back to top button
 * [x] Refactoring function `add_or_update_post`
-* [ ] Access statistics
+* [x] Statistics
 * [ ] Easy backup and import

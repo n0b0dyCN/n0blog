@@ -49,9 +49,9 @@ function posts_table_init() {
 					'click #refresh': function (e, value, row, index) {
 						$.post("/admin/api/posts/refresh", {path:row['path']}, function(ret_data){
 							//console.log(ret_data);
+							$posts_table.bootstrapTable('refresh');
 							alert("refresh: " + ret_data.status);
 						});
-						$posts_table.bootstrapTable('refresh');
 					}
 				}
 			}, {
@@ -71,16 +71,16 @@ function posts_table_init() {
 					'click #hide': function (e, value, row, index) {
 						$.post("/admin/api/posts/show", {title:row['title']}, function(ret_data){
 							//console.log(ret_data);
+							$posts_table.bootstrapTable('refresh');
 							alert("show: " + ret_data.status);
 						});
-						$posts_table.bootstrapTable('refresh');
 					},
 					'click #show': function (e, value, row, index) {
 						$.post("/admin/api/posts/hide", {title:row['title']}, function(ret_data){
 							//console.log(ret_data);
+							$posts_table.bootstrapTable('refresh');
 							alert("hide: " + ret_data.status);
 						});
-						$posts_table.bootstrapTable('refresh');
 					}
 				}
 			}
@@ -253,6 +253,35 @@ function comments_table_init() {
 	})
 };
 
+function statistics_table_init() {
+	var $comments_table = $("#admin-statistics-table");
+	$comments_table.bootstrapTable({
+		url: "/admin/api/statistics/getstatistics",
+		methods: "POST",
+		contentType: "application/x-www-form-urlencoded",
+		dataType: "json",
+		striped: true,
+		uniqueID: "id",
+		showRefresh: true,
+		undefinedText: "-",
+		iconsPrefix: 'iconfont',
+		icons: {
+			refresh: 'icon-refresh'
+		},
+		columns: [
+			{
+				field: 'key',
+				title: 'name',
+				align: 'center', valign: 'middle'
+			}, {
+				field: 'value',
+				title: 'value',
+				align: 'center', valign: 'middle'
+			}
+		]
+	})
+};
+
 function init_links_add_table() {
 	$("#link-add-form").submit(function(event){
 		event.preventDefault();
@@ -272,4 +301,5 @@ function init_links_add_table() {
 posts_table_init();
 links_table_init();
 comments_table_init();
+statistics_table_init();
 init_links_add_table();

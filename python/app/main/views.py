@@ -33,7 +33,7 @@ def cached(timeout=600, key='main_view_%s'):
 @cached()
 def index():
     posts = Post.query \
-                .filter(and_(Post.title!="resume", Post.title!="about")) \
+                .filter(Post.title!="resume") \
                 .filter_by(show=True) \
                 .order_by(Post.timestamp) \
                 .limit(10).all()
@@ -54,7 +54,7 @@ def resume():
 def archive():
     page = request.args.get('page', 1, type=int)
     pagination = Post.query \
-                    .filter(and_(Post.title!="resume", Post.title!="about")) \
+                    .filter(and_(Post.title!="resume")) \
                     .filter_by(show=True) \
                     .order_by(Post.timestamp.desc()).paginate(page, per_page=10, error_out=False)
     posts = pagination.items
