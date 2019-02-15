@@ -2,6 +2,8 @@
 
 Personal blog for those who knowns how to use docker and scp.
 
+This blog is inspired by [phithon's blog](https://www.leavesongs.com/) and [defcon-2018 home page](https://www.oooverflow.io/).
+
 ## What we support
 
 1. Adding post in markdown format.
@@ -65,3 +67,5 @@ Just add a post with title "resume".
 * [x] Remove not used libiraries
 * [x] Back to top button
 * [x] Refactoring function `add_or_update_post`
+* [ ] Access statistics
+* [ ] Easy backup and import
