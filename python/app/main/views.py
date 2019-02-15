@@ -14,8 +14,6 @@ from .. import db
 from .. import redis as cache
 from ..models import Post, Comment, Link, Tag
 
-from ..markdown_util import render_md_raw, add_or_update_post
-
 def cached(timeout=600, key='main_view_%s'):
     def decorator(f):
         @wraps(f)

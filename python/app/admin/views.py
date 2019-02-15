@@ -6,8 +6,6 @@ from . import admin
 from .forms import AdminLoginForm, LinkAddForm
 from .. import db
 from ..models import Post, Tag, Comment, Link
-from ..markdown_util import render_md_file, render_md_raw, \
-        add_or_update_post, make_show, make_hide, delete_post
 
 @admin.before_request
 def before_request():

@@ -1,5 +1,4 @@
 from datetime import datetime
-import bleach
 from markdown import markdown
 
 from flask_sqlalchemy import SQLAlchemy

@@ -1,4 +1,5 @@
 import os
+import re
 from flask import render_template, redirect, request, \
         url_for, flash, session, jsonify
 
@@ -6,9 +7,56 @@ from . import admin
 from .. import db
 from .. import redis as cache
 from ..models import Post, Tag, Comment, Link
-from ..markdown_util import render_md_file, render_md_raw, \
-        add_or_update_post, make_show, make_hide, delete_post
+from ..markdown_util import render_md_file, render_md_raw
 
+def add_or_update_post(path, commit=False):
+    pattern = re.compile("^\w+$")
+    if not re.match(pattern, path):
+        print("pattern not matched.")
+        return False
+    md_path = os.path.join(os.getenv("POSTS_PATH"), path, "post.md")
+    if not os.path.exists(md_path):
+        print("file not exists.")
+        return False
+    raw, html, meta = render_md_file(md_path)
+    p = Post.query.filter_by(path=path).first()
+    insert = (p==None)
+    if insert:
+        p = Post()
+        p.show = False
+    p.path = path
+    p.title = meta['title']
+    p.body = raw
+    p.body_html = html
+    p.tags = [ Tag.fromTxt(t) for t in meta['tags'] ]
+    p.isexist = True
+    if insert:
+        db.session.add(p)
+    else:
+        cache.delete_post(p.title)
+    if commit:
+        db.session.commit()
+    return True
+
+def make_show_hide(title, show):
+    p = Post.query.filter_by(title=title).first()
+    if not p:
+        return False
+    p.show = show
+    db.session.commit()
+    return True
+
+def make_show(title):
+    return make_show_hide(title, show=True)
+
+def make_hide(title):
+    return make_show_hide(title, show=False)
+
+def delete_post(title, commit=False):
+    p = Post.query.filter_by(title=title).first()
+    db.session.delete(p)
+    if commit:
+        db.session.commit()
 
 @admin.route("/api/getposts")
 def getposts():

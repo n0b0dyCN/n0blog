@@ -64,5 +64,4 @@ Just add a post with title "resume".
 * [x] Add redis support
 * [ ] Remove not used libiraries
 * [ ] Intra-article navigation
-* [ ] Tag cloud
-* [ ] Refactoring function `add_or_update_post`
+* [x] Refactoring function `add_or_update_post`
