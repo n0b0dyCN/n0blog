@@ -2,12 +2,23 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename="css/github-markdown.css") }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/github-markdown.css') }}">
 <link href="https://cdn.rawgit.com/google/code-prettify/master/loader/skins/desert.css" rel="stylesheet">
 {% endblock %}
 
 {% block header%}
 {% include "main/_header.html"%}
+<div id="header-post">
+    <span id="actions">
+        <ul class="list-inline">
+            <li class="list-inline-item pr-2">
+                <button class="btn" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+                    <i class="iconfont icon-top"></i>
+                </button>
+            </li>
+        </ul>
+    </span>
+</div>
 {% endblock%}
 
 {% block page_content %}

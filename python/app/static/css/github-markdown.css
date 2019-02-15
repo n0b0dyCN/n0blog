@@ -468,7 +468,7 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-	color: #8a7841;
+	color: #b39844;
 }
 
 .markdown-body h1,
@@ -519,7 +519,9 @@
 }
 
 .markdown-body h1:before {
-  content: "# ";
+  content: "#";
+  position: relative;
+  left: -1rem;
 }
 
 .markdown-body h2 {

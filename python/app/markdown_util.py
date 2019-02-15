@@ -16,7 +16,8 @@ def render_md_raw(raw):
     exts = ['markdown.extensions.meta',
             'markdown.extensions.fenced_code',
             'markdown.extensions.codehilite',
-            'markdown.extensions.tables']
+            'markdown.extensions.tables',
+            'markdown_checklist.extension']
     md = Markdown(extensions=exts, extension_configs=config)
     html = md.convert(raw)
     meta = {}

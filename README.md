@@ -62,6 +62,6 @@ Just add a post with title "resume".
 * [x] Comment showing
 * [x] Add post delete function
 * [x] Add redis support
-* [ ] Remove not used libiraries
-* [ ] Intra-article navigation
+* [x] Remove not used libiraries
+* [x] Back to top button
 * [x] Refactoring function `add_or_update_post`
