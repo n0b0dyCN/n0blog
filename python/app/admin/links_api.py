@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, \
 
 from . import admin
 from .. import db
+from .. import redis as cache
 from ..models import Post, Tag, Comment, Link
 
 @admin.route("/api/links/getlinks")
@@ -19,6 +20,7 @@ def links_add():
     l.description = request.form["description"]
     db.session.add(l)
     db.session.commit()
+    cache.delete_link()
     return jsonify({"status":"ok"})
 
 @admin.route("/api/links/update", methods=["POST"])
@@ -30,6 +32,7 @@ def links_update():
     l.link = request.form["link"]
     l.description = request.form["description"]
     db.session.commit()
+    cache.delete_link()
     return jsonify({"status":"ok"})
 
 @admin.route("/api/links/delete", methods=["POST"])
@@ -39,5 +42,6 @@ def links_delete():
         return jsonify({"status":"failed"})
     db.session.delete(l)
     db.session.commit()
+    cache.delete_link()
     return jsonify({"status":"ok"})
 

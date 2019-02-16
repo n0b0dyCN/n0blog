@@ -44,6 +44,7 @@ def make_show_hide(title, show):
         return False
     p.show = show
     db.session.commit()
+    cache.delete_post_list()
     return True
 
 def make_show(title):
@@ -68,6 +69,8 @@ def getposts():
             #cache.delete_post(p.title)
             p.exists = False
     for t in os.listdir(os.getenv("POSTS_PATH")):
+        if t[0] == ".":
+            continue
         folder_path = os.path.join(os.getenv("POSTS_PATH"), t)
         if not os.path.isdir(folder_path):
             continue

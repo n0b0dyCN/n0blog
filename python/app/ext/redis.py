@@ -35,3 +35,10 @@ class FlaskRedis():
         k = "main_view_/post/{}/".format(title)
         print("Delete cache: ", k)
         self.delete(k)
+    
+    def delete_post_list(self):
+        self.delete("main_view_/")
+        self.delete("main_view_/archive")
+    
+    def delete_link(self):
+        self.delete("main_view_/links")
