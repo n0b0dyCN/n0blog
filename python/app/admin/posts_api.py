@@ -10,7 +10,7 @@ from ..models import Post, Tag, Comment, Link
 from ..markdown_util import render_md_file, render_md_raw
 
 def add_or_update_post(path, commit=False):
-    pattern = re.compile("^\w+$")
+    pattern = re.compile("^[\w\-]+$")
     if not re.match(pattern, path):
         print("pattern not matched.")
         return False
@@ -69,12 +69,15 @@ def getposts():
             #cache.delete_post(p.title)
             p.exists = False
     for t in os.listdir(os.getenv("POSTS_PATH")):
+        print(t)
         if t[0] == ".":
             continue
         folder_path = os.path.join(os.getenv("POSTS_PATH"), t)
         if not os.path.isdir(folder_path):
+            print("not dir")
             continue
         if t in path_post_dict:
+            print("in dict")
             path_post_dict[t].exists = True
             continue
         add_or_update_post(t, commit=False)

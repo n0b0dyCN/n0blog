@@ -35,7 +35,7 @@ def index():
     posts = Post.query \
                 .filter(Post.title!="resume") \
                 .filter_by(show=True) \
-                .order_by(Post.timestamp) \
+                .order_by(Post.timestamp.desc()) \
                 .limit(10).all()
     return render_template('main/index.html', posts=posts)
 
