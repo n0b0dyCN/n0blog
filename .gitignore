@@ -2,6 +2,7 @@
 *.swp
 *.swo
 *~
+here.yml
 
 # ignore database data
 sql/postgres-data/
