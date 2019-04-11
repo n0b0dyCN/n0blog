@@ -11,13 +11,18 @@ def render_md_raw(raw):
         'markdown.extensions.codehilite': {
             'use_pygments': False,
             'css_class': 'prettyprint',
+        },
+        'mdx_math': {
+            'enable_dollar_delimiter': True
         }
     }
     exts = ['markdown.extensions.meta',
             'markdown.extensions.fenced_code',
             'markdown.extensions.codehilite',
             'markdown.extensions.tables',
-            'markdown_checklist.extension']
+            'markdown_checklist.extension',
+            'mdx_math'
+           ]
     md = Markdown(extensions=exts, extension_configs=config)
     html = md.convert(raw)
     meta = {}

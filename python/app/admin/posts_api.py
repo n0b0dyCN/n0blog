@@ -69,15 +69,15 @@ def getposts():
             #cache.delete_post(p.title)
             p.exists = False
     for t in os.listdir(os.getenv("POSTS_PATH")):
-        print(t)
+        # print(t)
         if t[0] == ".":
             continue
         folder_path = os.path.join(os.getenv("POSTS_PATH"), t)
         if not os.path.isdir(folder_path):
-            print("not dir")
+            # print("not dir")
             continue
         if t in path_post_dict:
-            print("in dict")
+            # print("in dict")
             path_post_dict[t].exists = True
             continue
         add_or_update_post(t, commit=False)
