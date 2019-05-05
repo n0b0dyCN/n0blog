@@ -28,7 +28,7 @@ def add_or_update_post(path, commit=False):
     p.title = meta['title']
     p.body = raw
     p.body_html = html
-    p.tags = [ Tag.fromTxt(t) for t in meta['tags'] ]
+    p.tags = [ Tag.query.filter_by(txt=t).one_or_none() or Tag.fromTxt(t) for t in meta['tags'] ]
     p.isexist = True
     if insert:
         db.session.add(p)

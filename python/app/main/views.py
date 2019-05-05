@@ -92,8 +92,10 @@ def post(title):
 @main.route('/tag/<string:txt>')
 @cached()
 def tag(txt):
-    posts = Tag.query.filter_by(txt=txt).first().posts
-    return render_template('main/tag.html', posts=posts, tag=txt)
+    t = Tag.query.filter_by(txt=txt).first()
+    if not t:
+        return render_template('error/404.html')
+    return render_template('main/tag.html', posts=t.posts, tag=txt)
 
 @main.route('/post/<string:title>/<string:img_name>')
 def post_images(title, img_name):

@@ -23,7 +23,7 @@ class Post(db.Model):
     show = db.Column(db.Boolean)
     isexist = db.Column(db.Boolean)
     comments = db.relationship('Comment', backref='post', lazy='dynamic', cascade='all, delete-orphan', passive_deletes=True)
-    tags = db.relationship('Tag', secondary=post_tag, backref=db.backref('posts'), single_parent=True, cascade='all, delete-orphan', passive_deletes=True)
+    tags = db.relationship('Tag', secondary=post_tag, backref=db.backref('posts'), cascade='all', passive_deletes=True)
 
     def to_dict(self):
         d = {}
