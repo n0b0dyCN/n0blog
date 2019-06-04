@@ -47,6 +47,8 @@ docker-compose up --build
 
 In this repo, we provide a sample post `./posts/sample/`. The content of the post is just this readme file.
 
+**We recommand that you maintain your posts with git add set posts as a git submodule.**
+
 #### Note
 
 * All pictures you used in your post should be in the same folder with `post.md`, and you can just use the relative path to insert picture in the markdown file:
